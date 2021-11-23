@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+const R = require('ramda');
+
 class Person {
   name: string;
   country: string;
@@ -9,6 +11,8 @@ class Person {
     this.country = country;
   }
 }
+
+const countryLens = R.lens(R.prop('country'));
 
 const persons: Person[] = [
   new Person('person1', 'US'),
