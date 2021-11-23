@@ -1,5 +1,5 @@
 import _ from 'lodash';
-
+// import R from 'ramda';
 const R = require('ramda');
 
 class Person {
@@ -12,7 +12,7 @@ class Person {
   }
 }
 
-const countryLens = R.lens(R.prop('country'));
+const countryLens = R.lens(R.prop('country'), R.assoc('country'));
 
 const persons: Person[] = [
   new Person('person1', 'US'),
@@ -27,5 +27,5 @@ const gatherStats = (stat, country) => {
   return stat;
 }
 
-const data = _(persons).map(getCountry).reduce(gatherStats, {});
+const data = _(persons).map(R.view(countryLens)).reduce(gatherStats, {});
 console.log(data);
