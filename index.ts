@@ -1,11 +1,27 @@
 import _ from 'lodash';
-import { hashCode } from 'ts-utls';
 
-function generateRandomNumber() {
-  return Math.random() * 1000;
+class Person {
+  name: string;
+  country: string;
+
+  constructor(name, country) {
+    this.name = name;
+    this.country = country;
+  }
 }
 
-_.range(10).forEach(() => {
-  const number = generateRandomNumber();
-  console.log(`hashCode(${number}): ${hashCode(`${number}`)}`);
-});
+const persons: Person[] = [
+  new Person('person1', 'US'),
+  new Person('person2', 'US'),
+  new Person('person3', 'Greece'),
+  new Person('person4', 'Hungary'),
+];
+
+const getCountry = person => person.country;
+const gatherStats = (stat, country) => {
+  stat[country] = _.isUndefined(stat[country]) ? 1 : stat[country] + 1;
+  return stat;
+}
+
+const data = _(persons).map(getCountry).reduce(gatherStats, {});
+console.log(data);
