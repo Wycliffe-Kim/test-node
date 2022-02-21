@@ -1,20 +1,42 @@
-const R = require('ramda');
+'use strict'
 
-class Wrapper {
-  constructor(value) {
-    this._value = value;
-  }
+function doPromise() {
+  return new Promise((resolve) => {
+    resolve("test");
+  });
+}
 
-  map(f) {
-    return f(this._value);
-  }
-
-  fmap(f) {
-    return new Wrapper(f(this._value));
+const obj1 = {
+  methods: {
+    func: function() {
+      doPromise().then(function(message) {
+        this.message = message;
+        console.log(this);
+      })
+    },
+    func2: function() {
+      this.message = "test";
+      console.log(this);
+    }
   }
 }
 
-const two = new Wrapper(2);
-const add = R.curry((a, b) => a + b);
+const obj2 = {
+  methods: {
+    func: function()  {
+      doPromise().then((message) => {
+        this.message = message;
+        console.log(this);
+      });
+    },
+    func2: () => {
+      this.message = "test";
+      console.log(this);
+    }
+  }
+}
 
-console.log(two.fmap(add(3)).fmap(add(2)).map(R.identity)); // 7
+obj1.methods.func();
+obj2.methods.func();
+// obj1.methods.func2();
+// obj2.methods.func2();
