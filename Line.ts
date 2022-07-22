@@ -75,21 +75,25 @@ export namespace Line {
    * rotation matrix를 적용.
    * https://reminder-by-kwan.tistory.com/133 참고
    */
-  export const rotated = (line: Line, radius: number, angle: number): Line => {
+  export const rotated = (line: Line, ratio: number, angle: number): Line => {
     const radian = (angle * Math.PI) / 180;
 
     const makePoint = curry(
       (
         radian: number,
-        radius: number,
+        ratio: number,
         centerPoint: Point,
         point: Point
       ): Point => ({
         x:
-          radius * (point.x * Math.cos(radian) - point.y * Math.sin(radian)) +
+          ratio *
+            ((point.x - centerPoint.x) * Math.cos(radian) -
+              (point.y - centerPoint.y) * Math.sin(radian)) +
           centerPoint.x,
         y:
-          radius * (point.x * Math.sin(radian) + point.y * Math.cos(radian)) +
+          ratio *
+            ((point.x - centerPoint.x) * Math.sin(radian) +
+              (point.y - centerPoint.y) * Math.cos(radian)) +
           centerPoint.y,
       })
     );
@@ -97,7 +101,7 @@ export namespace Line {
     const centerPoint = center(line);
     const { point1, point2 } = line;
 
-    const _makePoint = makePoint(radian, radius, centerPoint);
+    const _makePoint = makePoint(radian, ratio, centerPoint);
 
     return {
       point1: _makePoint(point1),

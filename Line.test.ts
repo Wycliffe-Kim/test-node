@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Line } from './Line';
 import { Point } from './Point';
 
@@ -83,7 +84,126 @@ describe('includedAngle', () => {
         y: 164.5,
       },
     };
-    console.log(Line.angle(line1), Line.angle(line2));
     expect(Line.includedAngle(line1, line2)).toBe(90);
+  });
+});
+
+describe('rotated', () => {
+  it('90 degree, ratio 1', () => {
+    const line: Line = {
+      point1: {
+        x: 2,
+        y: 4,
+      },
+      point2: {
+        x: 4,
+        y: 2,
+      },
+    };
+
+    const rotated = Line.rotated(line, 1, 90);
+    const equal = _.isEqual(rotated, {
+      point1: {
+        x: 2,
+        y: 2,
+      },
+      point2: {
+        x: 4,
+        y: 4,
+      },
+    });
+    expect(equal).toBe(true);
+  });
+
+  it('90 degree, ratio 0.5', () => {
+    const line: Line = {
+      point1: {
+        x: 4,
+        y: 2,
+      },
+      point2: {
+        x: 2,
+        y: 4,
+      },
+    };
+
+    const rotated = Line.rotated(line, 0.5, 90);
+    const equal = _.isEqual(rotated, {
+      point1: {
+        x: 3.5,
+        y: 3.5,
+      },
+      point2: {
+        x: 2.5,
+        y: 2.5,
+      },
+    });
+    expect(equal).toBe(true);
+  });
+
+  it('90 degree, ratio 1', () => {
+    const line: Line = {
+      point1: {
+        x: -1,
+        y: 1,
+      },
+      point2: {
+        x: 1,
+        y: -1,
+      },
+    };
+
+    const rotated = Line.rotated(line, 1, 135);
+    const result: Line = {
+      point1: {
+        x: -1,
+        y: -1,
+      },
+      point2: {
+        x: 1,
+        y: 1,
+      },
+    };
+    console.log(
+      {
+        point2: rotated.point1,
+        point1: Line.center(rotated),
+      },
+      {
+        point2: Line.center(result),
+        point1: result.point2,
+      }
+    );
+    const equal = _.isEqual(rotated, result);
+    console.log(
+      Line.includedAngle(
+        {
+          point2: rotated.point1,
+          point1: Line.center(rotated),
+        },
+        {
+          point2: result.point1,
+          point1: Line.center(result),
+        }
+      )
+    );
+    console.log(
+      Line.angle({
+        point2: rotated.point1,
+        point1: Line.center(rotated),
+      }),
+      Line.angle(result)
+    );
+    console.log(
+      (Math.atan(
+        Line.gradient({
+          point2: rotated.point1,
+          point1: Line.center(rotated),
+        })
+      ) *
+        180) /
+        Math.PI
+    );
+    expect(equal).toBe(true);
   });
 });
