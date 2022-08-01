@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Line } from './Line';
-import { Point } from './Point';
+import { Point } from '../Point';
 
 describe('angle', () => {
   const origin: Point = { x: 0, y: 0 };
@@ -172,7 +172,7 @@ describe('rotated', () => {
       {
         point2: Line.center(result),
         point1: result.point2,
-      }
+      },
     );
     const equal = _.isEqual(rotated, result);
     console.log(
@@ -184,25 +184,25 @@ describe('rotated', () => {
         {
           point2: result.point1,
           point1: Line.center(result),
-        }
-      )
+        },
+      ),
     );
     console.log(
       Line.angle({
         point2: rotated.point1,
         point1: Line.center(rotated),
       }),
-      Line.angle(result)
+      Line.angle(result),
     );
     console.log(
       (Math.atan(
         Line.gradient({
           point2: rotated.point1,
           point1: Line.center(rotated),
-        })
+        }),
       ) *
         180) /
-        Math.PI
+        Math.PI,
     );
     expect(equal).toBe(true);
   });
