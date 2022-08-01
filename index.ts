@@ -1,25 +1,11 @@
-import { Line } from './Line';
-import { Point } from './Point';
+import _ from 'lodash';
 
-const origin: Point = {
-  x: 0,
-  y: 0,
-};
+const endTime = new Date();
 
-const line1: Line = {
-  point1: origin,
-  point2: {
-    x: 0,
-    y: 10,
-  },
-};
+const hourToMs = (hour: number) => hour * 60 * 60 * 1000;
 
-const line2: Line = {
-  point1: origin,
-  point2: {
-    x: 1,
-    y: -1,
-  },
-};
+const msToHour = (ms: number) => ms / (60 * 60 * 1000);
 
-console.log(Line.includedAngle(line1, line2));
+const startTime = new Date(endTime.getTime() - hourToMs(1));
+
+console.log(endTime, startTime);
