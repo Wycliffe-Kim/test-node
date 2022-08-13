@@ -9,5 +9,3 @@ const msToHour = (ms: number) => ms / (60 * 60 * 1000);
 const startTime = new Date(endTime.getTime() - hourToMs(1));
 
 console.log(endTime, startTime);
-
-console.log('test merge 2');
