@@ -11,6 +11,6 @@ const startTime = new Date(endTime.getTime() - hourToMs(1));
 
 console.log(endTime, startTime);
 
-console.log('test merge 19');
+console.log('test merge 20');
 
 test1();
