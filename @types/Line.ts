@@ -89,6 +89,9 @@ export const Line = {
 
     const _makePoint = makePoint(radian, ratio, centerPoint);
 
+    console.log('merge');
+    console.log('test');
+
     return {
       point1: _makePoint(point1),
       point2: _makePoint(point2),
