@@ -20,7 +20,7 @@ jobs:
   CI_second:
     name: CI Second
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'second') || contains(github.event.head_commit.message, 'common')
+    if: contains(github.event.head_commit.message, 'second') || contains(github.event.head_commit.message, 'common') 
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
