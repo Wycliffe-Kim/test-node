@@ -6,10 +6,22 @@ on:
       - master
 
 jobs:
-  CI:
-    name: CI
+  CI_first:
+    name: CI First
     runs-on: ubuntu-latest
     steps:
+      if: "contains(github.event.head_commit.message, 'first') || contains(github.event.head_commit.message, 'common')"
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Test
+        run: echo ${{github.event.head_commit.message}} 
+
+  CI_second:
+    name: CI Second
+    runs-on: ubuntu-latest
+    steps:
+      if: "contains(github.event.head_commit.message, 'second') || contains(github.event.head_commit.message, 'common')"
       - name: Checkout Repo
         uses: actions/checkout@master
 
