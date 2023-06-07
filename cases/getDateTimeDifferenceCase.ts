@@ -63,5 +63,6 @@ export const getDateTimeDifferenceCase = () => {
     resultFormat: 'AS_YEARS',
   });
 
+  console.log('----- getDateTimeDifferenceCase -----');
   console.log(result);
 };

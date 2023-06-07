@@ -39,6 +39,8 @@ const dateToString = (
 
 export const dateToStringCase = () => {
   const date = new Date();
+
+  console.log('----- dateToStringCase -----');
   console.log(dateToString(date));
   console.log(dateToString(date, { containMilliseconds: true }));
   console.log(dateToString(date, { isIso: true }));
