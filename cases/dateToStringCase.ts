@@ -45,4 +45,12 @@ export const dateToStringCase = () => {
   console.log(dateToString(date, { containMilliseconds: true }));
   console.log(dateToString(date, { isIso: true }));
   console.log(dateToString(date, { isIso: true, containMilliseconds: true }));
+
+  console.log(date.getFullYear(), date.getUTCFullYear());
+  console.log(date.getMonth(), date.getUTCMonth());
+  console.log(date.getDate(), date.getUTCDate());
+  console.log(date.getHours(), date.getUTCHours());
+  console.log(date.getMinutes(), date.getUTCMinutes());
+  console.log(date.getSeconds(), date.getUTCSeconds());
+  console.log(date.getMilliseconds(), date.getUTCMilliseconds());
 };
