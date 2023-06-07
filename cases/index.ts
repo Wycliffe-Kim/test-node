@@ -9,4 +9,4 @@
  */
 export * from './aiSafeCrossingEventBlockList';
 export * from './dateToStringCase';
-export * from './tapTest';
+export * from './getDateDifferenceCase';
