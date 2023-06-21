@@ -8,7 +8,12 @@
  * Email: contact@nota.ai
  */
 
-import { dateToStringCase, getDateTimeDifferenceCase } from './cases';
+import {
+  dateToStringCase,
+  getDateTimeDifferenceCase,
+  movingAverageCase,
+} from './cases';
 
 dateToStringCase();
 getDateTimeDifferenceCase();
+movingAverageCase();

@@ -10,3 +10,4 @@
 export * from './aiSafeCrossingEventBlockList';
 export * from './dateToStringCase';
 export * from './getDateTimeDifferenceCase';
+export * from './movingAverageCase';
