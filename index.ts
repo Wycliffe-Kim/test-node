@@ -12,8 +12,10 @@ import {
   dateToStringCase,
   getDateTimeDifferenceCase,
   movingAverageCase,
+  stringToNumberCase,
 } from './cases';
 
 dateToStringCase();
 getDateTimeDifferenceCase();
 movingAverageCase();
+stringToNumberCase();
