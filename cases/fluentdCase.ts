@@ -1,4 +1,5 @@
 import { createFluentSender } from 'fluent-logger';
+import { generateRandomNumber } from '../functions';
 
 export const fluentdCase = () => {
   console.log('----- fluentdCase -----');
@@ -10,13 +11,16 @@ export const fluentdCase = () => {
     reconnectInterval: 600000, // 10 minutes
   });
 
-  sender.emit({
-    title: 'ldm-streaming',
-    user: 2,
-  });
+  setInterval(() => {
+    const titles = ['ldm-streaming', 'event-timeline'];
+    const users = [1, 2, 3, 4, 5];
 
-  sender.emit({
-    title: 'event-timeline',
-    user: 3,
-  });
+    const title = titles[generateRandomNumber(0, 1, true)];
+    const user = users[generateRandomNumber(0, 4, true)];
+
+    sender.emit({
+      title,
+      user,
+    });
+  }, 1000);
 };

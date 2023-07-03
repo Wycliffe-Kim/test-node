@@ -1,8 +1,17 @@
 version: '3.3'
 
 services:
-  # fluentd
-  # fluentd log 수집 서비스
+  # nginx:
+  #   container_name: traffic-commander-nginx
+  #   image: notadevteam/traffic-commander-nginx
+  #   build:
+  #     context: ./
+  #     dockerfile: ./dockerfiles/nginx.Dockerfile
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - fluentd
+
   fluentd:
     container_name: traffic-commander-fluentd
     image: notadevteam/traffic-commander-fluentd
@@ -15,3 +24,16 @@ services:
     volumes:
       - ./fluentd/conf:/fluentd/etc
       - ./fluentd/log:/fluentd/log
+
+  elastic:
+    container_name: traffic-commander-elastic
+    image: notadevteam/traffic-commander-elastic
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/elasticsearch.Dockerfile
+    ports:
+      - 9200:9200
+    volumes:
+      - ./elastic/data:/usr/share/elasticsearch/data
+    depends_on:
+      - fluentd
