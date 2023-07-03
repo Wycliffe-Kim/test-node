@@ -10,6 +10,7 @@
 
 import {
   dateToStringCase,
+  fluentdCase,
   getDateTimeDifferenceCase,
   movingAverageCase,
   stringToNumberCase,
@@ -19,3 +20,4 @@ dateToStringCase();
 getDateTimeDifferenceCase();
 movingAverageCase();
 stringToNumberCase();
+fluentdCase();

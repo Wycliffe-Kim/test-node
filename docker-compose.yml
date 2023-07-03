@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  # fluentd
+  # fluentd log 수집 서비스
+  fluentd:
+    container_name: traffic-commander-fluentd
+    image: notadevteam/traffic-commander-fluentd
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/fluentd.Dockerfile
+    ports:
+      - 8888:8888
+      - 8888:8888/udp
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+      - ./fluentd/log:/fluentd/log
