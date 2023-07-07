@@ -30,10 +30,22 @@ services:
     image: notadevteam/traffic-commander-elastic
     build:
       context: ./
-      dockerfile: ./dockerfiles/elasticsearch.Dockerfile
+      dockerfile: ./dockerfiles/elastic.Dockerfile
     ports:
       - 9200:9200
+      - 9300:9300
     volumes:
       - ./elastic/data:/usr/share/elasticsearch/data
     depends_on:
       - fluentd
+
+  kibana:
+    container_name: traffic-commander-kibana
+    image: notadevteam/traffic-commander-kibana
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/kibana.Dockerfile
+    ports:
+      - 5601:5601
+    depends_on:
+      - elastic
