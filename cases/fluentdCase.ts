@@ -1,35 +1,33 @@
-/*
- * Copyright (C) 2023 nota inc. All rights reserved.
- * This source code is the property of nota inc. and is protected by copyright law. THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY TRANSFER OF OWNERSHIP, COPYRIGHT OR ANY RIGHTS INCLUDING BUT NOT LIMITED TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
- * Unauthorized disclosure, reproduction, modification, distribution, or commercial use of all or any part of this source code without prior written consent from Nota Inc. is strictly prohibited.
- * This source code is provided "as is" and without any warranty, express or implied.
- * Nota Inc. shall not be liable for any damages arising from the use of this source code.
- * For inquiries regarding the use of this source code, please contact Nota Inc. at:
- * Email: contact@nota.ai
- */
-import { createFluentSender } from 'fluent-logger';
 import { generateRandomNumber } from '../functions';
+import axios from 'axios';
 
 export const fluentdCase = () => {
   console.log('----- fluentdCase -----');
-
-  const sender = createFluentSender('site-configuration', {
-    host: 'localhost',
-    port: 8888,
-    timeout: 3.0,
-    reconnectInterval: 600000, // 10 minutes
-  });
-
   setInterval(() => {
-    const titles = ['ldm-streaming', 'event-timeline'];
-    const users = [1, 2, 3, 4, 5];
+    const sites = ['daejeon-600', 'daejeon-smart-city', 'mk', 'global-demo'];
+    const pages = ['overview', 'chart', 'table'];
+    const overviewTitles = ['site-list', 'map', 'overall-statistics'];
+    const chartTitles = ['traffic-count', 'detail', 'comparison'];
+    const tableTitles = ['traffic-count', 'data-validation', 'turning-count'];
 
-    const title = titles[generateRandomNumber(0, 1, true)];
-    const user = users[generateRandomNumber(0, 4, true)];
+    const site = sites[generateRandomNumber(0, sites.length - 1, true)];
+    const page = pages[generateRandomNumber(0, pages.length - 1, true)];
+    const title =
+      page === 'overview'
+        ? overviewTitles[
+            generateRandomNumber(0, overviewTitles.length - 1, true)
+          ]
+        : page === 'chart'
+        ? chartTitles[generateRandomNumber(0, chartTitles.length - 1, true)]
+        : tableTitles[generateRandomNumber(0, tableTitles.length - 1, true)];
 
-    sender.emit({
-      title,
-      user,
-    });
+    axios.post(
+      `http://localhost:8888/traffic_commander.${site}.${page}.${title}`,
+      `json=${JSON.stringify({
+        site,
+        page,
+        title,
+      })}`,
+    );
   }, 1000);
 };

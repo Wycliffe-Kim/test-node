@@ -10,12 +10,14 @@
 
 import {
   dateToStringCase,
+  fluentdCase,
   getDateTimeDifferenceCase,
   movingAverageCase,
   stringToNumberCase,
 } from './cases';
 
-dateToStringCase();
-getDateTimeDifferenceCase();
-movingAverageCase();
-stringToNumberCase();
+// dateToStringCase();
+// getDateTimeDifferenceCase();
+// movingAverageCase();
+// stringToNumberCase();
+fluentdCase();
