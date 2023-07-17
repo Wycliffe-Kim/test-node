@@ -13,3 +13,17 @@ services:
     volumes:
       - ./fluentd/conf:/fluentd/etc
       - ./fluentd/log:/fluentd/log
+
+  elasticsearch:
+    container_name: traffic-commander-elasticsearch
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/elasticsearch.Dockerfile
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
+    ports:
+      - 9200:9200
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
