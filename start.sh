@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-docker-compose up --build --remove-orphans
+docker-compose --env-file docker-compose.env up --build --remove-orphans -d
