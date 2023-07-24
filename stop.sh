@@ -2,7 +2,7 @@
 set -e
 
 TEMP=$1
-IS_PRUNE=${TEMP:-true}
+IS_PRUNE=${TEMP:-false}
 
 docker-compose --env-file docker-compose.env down --remove-orphans
 
