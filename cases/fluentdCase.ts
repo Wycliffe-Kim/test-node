@@ -30,6 +30,13 @@ export const fluentdCase = () => {
       })}`,
     );
 
-    console.log('test3');
+    console.group('test3');
+    const data = {
+      site,
+      page,
+      title,
+    };
+    console.log(data);
+    console.groupEnd();
   }, 1000);
 };
