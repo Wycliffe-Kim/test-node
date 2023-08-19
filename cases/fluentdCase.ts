@@ -29,5 +29,7 @@ export const fluentdCase = () => {
         title,
       })}`,
     );
+
+    console.log('test3');
   }, 1000);
 };
