@@ -7,7 +7,9 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
+import { Record } from 'immutable';
 
-import { immutableTest } from './cases';
-
-immutableTest();
+export const immutableTest = () => {
+  const d = Record({ a: 1, b: { test: 1 } })();
+  console.log(d.set('a', 3).set('b', { test: 3 }).toJSON());
+};
