@@ -7,7 +7,18 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
+const convert = (data: string) =>
+  data
+    .toLowerCase()
+    .replace(/_/g, ' ')
+    .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase())
+    .replace(/ /g, '')
+    .replace(/(?:^|\s)\S/g, (a) => a.toLowerCase());
 
-import { magicNumberToCamelCase } from './cases';
+export const magicNumberToCamelCase = () => {
+  console.log('----- magicNumberToCamelCase -----');
 
-magicNumberToCamelCase();
+  const data = 'JAYWALKING';
+
+  console.log(convert(data));
+};
