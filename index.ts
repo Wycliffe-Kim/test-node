@@ -1,3 +1,3 @@
-import { magicNumberToCamelCase } from './cases';
+import { shapefileTest } from './cases';
 
-magicNumberToCamelCase();
+shapefileTest();

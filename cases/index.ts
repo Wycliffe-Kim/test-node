@@ -5,4 +5,5 @@ export * from './getDateTimeDifferenceCase';
 export * from './immutableTest';
 export * from './magicNumberToCamelCase';
 export * from './movingAverageCase';
+export * from './shapefileTest';
 export * from './stringToNumberCase';
