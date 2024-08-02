@@ -73,6 +73,7 @@
     "shapefile": "^0.6.6",
     "shapefile.js": "^1.1.4",
     "shpjs": "^5.0.0",
+    "string-ts": "^2.2.0",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.2.1",
     "ts-utls": "^1.1.4",
