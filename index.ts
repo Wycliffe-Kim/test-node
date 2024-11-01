@@ -7,26 +7,24 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
+import { Either } from 'monet';
 
-import { pipe, when } from 'ramda';
-import { replace } from 'string-ts';
+const isString = (value: unknown): value is string =>
+  typeof value === 'string' && value.length > 0;
 
-export const makeUrlFromEndpoint = (endpoint: string) => {
-  const removeMethod = when(
-    (endpoint: string) => /GET|POST|PATCH|PUT|DELETE/g.test(endpoint),
-    (endpoint) => replace(endpoint, /GET|POST|PATCH|PUT|DELETE/g, ''),
-  );
+export const isValidUrl = (url: unknown, protocol?: string) =>
+  isString(url) &&
+  Either.fromTry(() => {
+    const _url = new URL(url);
+    if (protocol !== undefined) {
+      if (!_url.protocol.includes(protocol)) {
+        throw Error(
+          `protocol is not same! (_url.protocol=${_url.protocol}, protocol=${protocol})`,
+        );
+      }
+    }
+  }).isRight();
 
-  const make = pipe(removeMethod, (endpoint) => replace(endpoint, '@', ''));
-
-  return make(endpoint);
-};
-
-const endpoint = '@/api/v1/users';
-
-console.log(makeUrlFromEndpoint(endpoint));
-console.log(makeUrlFromEndpoint('GET@/api/v1/users'));
-console.log(makeUrlFromEndpoint('POST@/api/v1/users'));
-console.log(makeUrlFromEndpoint('PATCH@/api/v1/users'));
-console.log(makeUrlFromEndpoint('PUT@/api/v1/users'));
-console.log(makeUrlFromEndpoint('DELETE@/api/v1/users'));
+console.log(
+  isValidUrl('rtsp://username:43434@34.64.33.111:5444/stream', 'rtsp'),
+);
